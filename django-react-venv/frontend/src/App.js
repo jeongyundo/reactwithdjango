@@ -8,8 +8,10 @@ class App extends Component {
 
     async componentDidMount() {
         try {
+            const proxyurl = "https://cors-anywhere.herokuapp.com/";
             const url = 'http://localhost:8000/api/';
-            const res = await fetch(url);
+            const res = await fetch(proxyurl+url);
+            console.log("2",res)
             const posts = await res.json();
             this.setState({
                 posts
