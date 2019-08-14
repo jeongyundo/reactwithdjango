@@ -25,7 +25,7 @@ SECRET_KEY = 'hc9q_-o1$*lxyn4pkd1zj!w1p$=to8)7jfq^wgp90pmg0i7bw*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'infoapi.apps.InfoapiConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+        'corsheaders.middleware.CorsMiddleware',     # 추가
+    'django.middleware.common.CommonMiddleware', # 추가
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,8 +53,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}
 ROOT_URLCONF = 'mainserver.urls'
+
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
 
 TEMPLATES = [
     {
