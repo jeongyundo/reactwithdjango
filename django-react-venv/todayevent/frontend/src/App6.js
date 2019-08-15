@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BoardForm from './App6_BoardForm';
 import BoardItem from './App6_BoardItem';
+import axios from 'axios';
 
 /*
     component files.
@@ -21,10 +22,18 @@ class App6 extends Component {
             this.setState({
                 boards
             });
+
+            let a = axios.post('/msg', {
+                user: 'admin',
+                message: 'hi'
+            })
+            .then( response => { console.log(response) } )
+            .catch( response => { console.log(response) } );
         } catch (e) {
             console.log(e);
         }
     }
+    
     
     handleSaveData = (data) => {
         if (!data.brdno) {            // new : Insert
