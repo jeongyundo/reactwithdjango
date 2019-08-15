@@ -8,7 +8,7 @@ import BoardItem from './App6_BoardItem';
 class App6 extends Component {
 
     state = {
-        maxNo: 3,
+        maxNo: 4,
         boards: [],
         selectedBoard:{}
     }
@@ -30,12 +30,12 @@ class App6 extends Component {
         if (!data.brdno) {            // new : Insert
             this.setState({
                 maxNo: this.state.maxNo+1,
-                boards: this.state.boards.concat({brdno: this.state.maxNo, brddate: new Date(), ...data }),
+                boards: this.state.boards.concat({id: this.state.maxNo, created: new Date(), ...data }),
                 selectedBoard: {}
             });
         } else {                                                        // Update
             this.setState({
-                boards: this.state.boards.map(row => data.brdno === row.brdno ? {...data }: row),
+                boards: this.state.boards.map(row => data.id === row.id ? {...data }: row),
                 selectedBoard: {}
             })            
         }
