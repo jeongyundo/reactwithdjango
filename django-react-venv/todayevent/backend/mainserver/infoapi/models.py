@@ -14,3 +14,7 @@ class infoapi(models.Model):
 
     class Meta:
         ordering = ['created']
+
+    owner = models.ForeignKey('auth.User', related_name='snippets', on_delete=models.CASCADE)
+    highlighted = models.TextField()
+    
