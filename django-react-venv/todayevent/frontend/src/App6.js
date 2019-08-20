@@ -16,19 +16,13 @@ class App6 extends Component {
 
     async componentDidMount() {
         try {
-            const res = await fetch('http://127.0.0.1:8000/infoapi/');
+            const res = await axios.get('http://127.0.0.1:8000/infoapis/');
             const boards = await res.json();
             console.log(boards)
             this.setState({
                 boards
             });
 
-            let a = axios.post('/msg', {
-                user: 'admin',
-                message: 'hi'
-            })
-            .then( response => { console.log(response) } )
-            .catch( response => { console.log(response) } );
         } catch (e) {
             console.log(e);
         }
@@ -71,6 +65,7 @@ class App6 extends Component {
                     <tbody>
                     <tr align="center">
                         <td width="50">No.</td>
+                        <id width="100">Writer</id>
                         <td width="300">Title</td>
                         <td width="100">Image</td>
                         <td width="100">Content</td>

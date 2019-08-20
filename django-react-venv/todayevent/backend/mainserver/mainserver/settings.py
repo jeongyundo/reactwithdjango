@@ -39,12 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'infoapi.apps.InfoapiConfig',
-    'corsheaders',
 ]
 
-MIDDLEWARE = [
-        'corsheaders.middleware.CorsMiddleware',     # 추가
-    'django.middleware.common.CommonMiddleware', # 추가
+MIDDLEWARE = [   # 추가
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,11 +50,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ]
 }
+
 ROOT_URLCONF = 'mainserver.urls'
 
 CORS_ORIGIN_WHITELIST = ['http://localhost:3000']

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from infoapi.models import infoapi
+from infoapi.models import Infoapi
 from django.contrib.auth.models import User
 
 # class infoapiSerializers(serializers.Serializer):
@@ -25,18 +25,18 @@ from django.contrib.auth.models import User
 #         return instance
 
 
-class infoapiSerializer(serializers.HyperlinkedModelSerializer):
+class InfoapiSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     highlight = serializers.HyperlinkedIdentityField(view_name='infoapi-highlight', format='html')
 
     class Meta:
-        model = infoapi
-        fields = ['id', 'name', 'content', 'image', 'date', 'website', 'created']
+        model = Infoapi
+        fields = ['id', 'highlight', 'owner', 'writer', 'name', 'content', 'image', 'date', 'website', 'created']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    snippets = serializers.HyperlinkedRelatedField(many=True, view_name='infoapi-detail', read_only=True)
+    infoapis = serializers.HyperlinkedRelatedField(many=True, view_name='infoapi-detail', read_only=True)
 
     class Meta:
         model = User
-        fields = ['url', 'id', 'username', 'infoapi']
+        fields = ['url', 'id', 'username', 'infoapis']

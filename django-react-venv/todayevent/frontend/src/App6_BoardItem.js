@@ -15,6 +15,7 @@ class BoardRow extends Component {
         return(
             <tr>
                 <td>{this.props.row.id}</td>
+                <td>{this.props.row.writer}</td>
                 <td><a onClick={this.handleSelectRow}>{this.props.row.name}</a></td>
                 <td>{this.props.row.image}</td>
                 <td>{this.props.row.content}</td>

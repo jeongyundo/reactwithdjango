@@ -1,8 +1,6 @@
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
-from infoapi.models import infoapi
-from infoapi.serializers import infoapiSerializers
+
+from infoapi.models import Infoapi
+from infoapi.serializers import InfoapiSerializer
 from rest_framework import generics
 from django.contrib.auth.models import User
 from infoapi.serializers import UserSerializer
@@ -16,22 +14,22 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets
 
-class infoapiViewSet(viewsets.ModelViewSet):
+class InfoapiViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list`, `create`, `retrieve`,
     `update` and `destroy` actions.
 
     Additionally we also provide an extra `highlight` action.
     """
-    queryset = infoapi.objects.all()
-    serializer_class = infoapiSerializer
+    queryset = Infoapi.objects.all()
+    serializer_class = InfoapiSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
 
     @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):
-        snippet = self.get_object()
-        return Response(snippet.highlighted)
+        infoapi = self.get_object()
+        return Response(infoapi.highlighted)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -40,7 +38,7 @@ class infoapiViewSet(viewsets.ModelViewSet):
 def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
-        'snippets': reverse('snippet-list', request=request, format=format)
+        'infoapis': reverse('infoapi-list', request=request, format=format)
     })
 
 
