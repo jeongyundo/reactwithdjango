@@ -3,6 +3,9 @@ import BoardForm from './App6_BoardForm';
 import BoardItem from './App6_BoardItem';
 import axios from 'axios';
 
+
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 /*
     component files.
 */
@@ -65,7 +68,7 @@ class App6 extends Component {
                     <tbody>
                     <tr align="center">
                         <td width="50">No.</td>
-                        <id width="100">Writer</id>
+                        <td width="100">Writer</td>
                         <td width="300">Title</td>
                         <td width="100">Image</td>
                         <td width="100">Content</td>
@@ -75,7 +78,7 @@ class App6 extends Component {
                     </tr>
                     {
                         boards.map(row =>
-                            (<BoardItem key={row.brdno} row={row} onRemove={this.handleRemove} onSelectRow={this.handleSelectRow} />)
+                            (<BoardItem key={row.id} row={row} onRemove={this.handleRemove} onSelectRow={this.handleSelectRow} />)
                         )
                     }
                     </tbody>
