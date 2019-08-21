@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework import serializers, fields
 from infoapi.models import Infoapi
 from django.contrib.auth.models import User
 
@@ -28,6 +28,7 @@ from django.contrib.auth.models import User
 class InfoapiSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     highlight = serializers.HyperlinkedIdentityField(view_name='infoapi-highlight', format='html')
+    date = fields.DateField(input_formats=['%Y-%m-%dT%H:%M'])
 
     class Meta:
         model = Infoapi
