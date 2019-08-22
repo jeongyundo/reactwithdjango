@@ -20,7 +20,8 @@ class App6 extends Component {
     async componentDidMount() {
         try {
             const res = await axios.get('http://127.0.0.1:8000/infoapis/');
-            const boards = await res.json();
+            console.log(res.data);
+            const boards = await res.data;
             console.log(boards)
             this.setState({
                 boards

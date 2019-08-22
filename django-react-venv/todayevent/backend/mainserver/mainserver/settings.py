@@ -149,8 +149,20 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
-    },
-}
+        'django.request': {
+            'handlers':['file'],
+            'propagate': False,
+            'level':'INFO', 
+            },
+        },
+    }
+
 REST_FRAMEWORK = {
-    'DATE_INPUT_FORMATS': ['iso-8601', '%Y-%m-%dT%H:%M'],
+    'DATE_INPUT_FORMATS': ['%Y-%m-%dT%H:%M'],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ]
 }

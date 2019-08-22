@@ -39,23 +39,33 @@ class BoardForm extends Component {
             content: this.state.content,
             date: this.state.date,
             website: this.state.website,
-            image: this.state.image
+            image: "none"
         }
 
         console.log("1",item)
-        axios.post('http://127.0.0.1:8000/infoapis/', { item },
-            {auth: { username: 'admin' ,password: 'admin1234'}})
+        const options = {
+            headers: {"Content-Type":"application/json"},
+            auth: {username: 'admin' ,password: 'admin1234'}
+        }
+        try {
+            axios.post('http://127.0.0.1:8000/infoapis/', item , options)
             .then(
                 res => {
                     console.log(item)
-                    console.log(res)
+                    console.log(res.response)
                 }
             ).catch(
                 res => {
-                    console.log(item)
-                    console.log(res)
+                    console.log("11",item)
+                    console.log(res.response)
+                },
+                error => {
+                    console.log("error",error)
                 }
             )
+        } catch(error) {
+            console.log("123",error);
+        } 
         // let selectedBoard = this.props.selectedBoard;
         // let data = {
         //     name: this.name.value,
