@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BoardForm from './App6_BoardForm';
 import BoardItem from './App6_BoardItem';
 import axios from 'axios';
+import { getLeads, deleteLead } from "./actions/leads";
 
 
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -17,7 +18,16 @@ class App6 extends Component {
         selectedBoard:{}
     }
 
+    static propTypes = {
+        leads: PropTypes.array.isRequired,
+        getLeads: PropTypes.func.isRequired,
+        deleteLead: PropTypes.func.isRequired
+    };
+    
+
     async componentDidMount() {
+        this.props.getLeads();
+
         try {
             const res = await axios.get('http://127.0.0.1:8000/infoapis/');
             console.log(res.data);
@@ -89,5 +99,15 @@ class App6 extends Component {
     }
 }
 
-export default App6;
 
+const mapStateToProps = state => ({
+    leads: state.leads.leads
+  });
+
+  
+// export default App6;
+
+export default connect(
+    mapStateToProps,
+    { getLeads, deleteLead }
+  )(Leads);
